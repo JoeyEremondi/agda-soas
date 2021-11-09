@@ -40,6 +40,10 @@ a₁ , a₂ ⟼₂ τ = (a₁ ∷ [ a₂ ]) , τ
 _,_,_⟼₃_ : (a₁ a₂ a₃ : Ctx × T) → T → List (Ctx × T) × T
 a₁ , a₂ , a₃ ⟼₃ τ = (a₁ ∷ a₂ ∷ [ a₃ ]) , τ
 
+
+_,_,_,_⟼₄_ : (a₁ a₂ a₃ a₄ : Ctx × T) → T → List (Ctx × T) × T
+a₁ , a₂ , a₃ , a₄ ⟼₄ τ = (a₁ ∷ a₂ ∷ a₃ ∷ [ a₄ ]) , τ
+
 _⟼ₙ_ : List (Ctx × T) → T → List (Ctx × T) × T
 _⟼ₙ_ = _,_
 
