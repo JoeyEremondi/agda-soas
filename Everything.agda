@@ -137,6 +137,9 @@ import SOAS.Metatheory.SecondOrder.Unit
 -- Equational theory
 import SOAS.Metatheory.SecondOrder.Equality
 
+--Non-symmetric theories
+import SOAS.Metatheory.SecondOrder.Preorder
+
 -- | Term syntax of a second-order signature
 
 -- Argument representation
