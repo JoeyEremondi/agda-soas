@@ -1,5 +1,6 @@
 name: soas
+depend:
+    standard-library
 include: .
-  ./agda-categories/src
-  ./agda-stdlib/src
   ./out
+  ./agda-categories/src

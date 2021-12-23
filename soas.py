@@ -254,6 +254,7 @@ def read_syn(file):
   has_ty, has_tm, has_th = [kw in ls for kw in ["type", "term", "theory"]]
 
   # Collect type signature lines
+  print("Collecting type signature lines")
   ty_lines =  []
   if has_ty:
     ty_pos = ls.index("type")
@@ -263,6 +264,7 @@ def read_syn(file):
       ty_lines.append(l.strip())
 
   # Collect term signature lines
+  print("Collecting term signature lines")
   tm_lines = []
   if has_tm:
     tm_pos = ls.index("term")
@@ -273,6 +275,7 @@ def read_syn(file):
       tm_lines.append(l.strip())
 
   # Collect equation and property lines
+  print("Equation and property lines")
   eq_lines = []
   prop_lines = []
   if has_th:
@@ -290,6 +293,7 @@ def read_syn(file):
         eq_lines.append(l.strip())
 
   # Parsing type operators
+  print("Parsing type operators")
   ty_ops = []
   derived = False
   for l in ty_lines:
@@ -305,6 +309,7 @@ def read_syn(file):
     ty_ops.append(TyOp(nm, int(ar[0]), fix, derived))
 
   # Parsing term operators
+  print("Parsing term operators")
   tm_ops = []
   derived = False
   for l in tm_lines:
@@ -320,6 +325,7 @@ def read_syn(file):
     tm_ops.append(op(sig, sym, fix[0] if fix else None, derived))
 
   # Extract signature name
+  print("Extracting signature name")
   if "|" in ls[0]:
     m = re.search("^syntax ([^ ]*) *\| *([^ ]*)", ls[0])
     syn_name = m.group(1)
@@ -331,6 +337,7 @@ def read_syn(file):
   ty_name = tm_name + "T"
 
   if "extends" in ls[0]:  # Syntax extends another file
+    print("Syntax extends another file")
     if ls[0].strip().endswith('extends'): # Extension with modification
       ext_list = []
       i = 1
@@ -374,6 +381,7 @@ def read_syn(file):
       base_syn = combine_syntax_list(mod_syns)
 
     else: # Extension without modification
+      print("Extension without modification")
       m = re.search("extends (.*)$", ls[0])
       files = splitstrip(m.group(1), ",")
    
@@ -389,6 +397,7 @@ def read_syn(file):
     return combine_syntaxes(base_syn, ext_syn, syn_name, tm_name)
 
   else: # No extension
+    print("No extension")
     ops = {op.name : op.sym for op in tm_ops}
     return Syntax(syn_name, 
       TypeSignature(ty_name, *ty_ops) if has_ty else Unsorted(),
