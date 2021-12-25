@@ -17,6 +17,15 @@ data ℐ : Familyₛ where
 oldₑ : (α {β} : T)(Γ : Ctx) → ℐ β Γ → ℐ β (α ∙ Γ)
 oldₑ α Γ = old {α}{_}{Γ}
 
+open import Relation.Nullary
+
+decEqℐ : ∀ {a b} (x y : ℐ a b) → Dec (x ≡ y)
+decEqℐ new new = yes refl
+decEqℐ new (old y) = no (λ ())
+decEqℐ (old x) new = no (λ ())
+decEqℐ (old x) (old y) with decEqℐ x y
+... | yes refl = yes refl
+... | no npf = no (λ { refl → npf refl })
 
 -- | Context-family maps
 -- Generalised transformations between 𝒳-terms in one context and 𝒴-terms in
